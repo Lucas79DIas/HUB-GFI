@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Central de Ferramentas — GFI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #2E61FF;
+      --blue-light: #EEF2FF;
+      --blue-mid: #D4DEFF;
+      --blue-dark: #1A44D4;
+      --gray-50: #F7F8FA;
+      --gray-100: #F0F1F5;
+      --gray-200: #E2E5EE;
+      --gray-400: #9AA0B4;
+      --gray-600: #5B6278;
+      --gray-900: #0F1523;
+      --white: #FFFFFF;
+      --shadow-sm: 0 1px 3px rgba(15,21,35,0.07), 0 1px 2px rgba(15,21,35,0.05);
+      --shadow-md: 0 4px 16px rgba(15,21,35,0.09), 0 2px 6px rgba(15,21,35,0.06);
+      --shadow-lg: 0 12px 32px rgba(46,97,255,0.14), 0 4px 12px rgba(15,21,35,0.08);
+      --radius: 14px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-900);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--gray-200);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(8px);
+    }
+
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-logo {
+      width: 36px;
+      height: 36px;
+      flex-shrink: 0;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .brand-name {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: -0.02em;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--gray-400);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .header-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--blue-light);
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 100px;
+      letter-spacing: 0.01em;
+    }
+
+    .header-badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--blue);
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    /* ── MAIN ── */
+    main {
+      flex: 1;
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 48px 24px 64px;
+    }
+
+    /* ── SECTION TITLE ── */
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 24px;
+      animation: fadeUp 0.5s ease 0.1s both;
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gray-400);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--gray-200);
+    }
+
+    /* ── CARDS GRID ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      animation: fadeUp 0.5s ease both;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:nth-child(1) { animation-delay: 0.15s; }
+    .card:nth-child(2) { animation-delay: 0.22s; }
+    .card:nth-child(3) { animation-delay: 0.29s; }
+    .card:nth-child(4) { animation-delay: 0.36s; }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(46,97,255,0.03) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--blue-mid);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--blue-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      transition: background 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .card:hover .card-icon {
+      background: var(--blue);
+    }
+
+    .card:hover .card-icon svg path {
+      fill: white;
+    }
+
+    .card-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gray-900);
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: var(--gray-600);
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 24px;
+    }
+
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--blue);
+      letter-spacing: 0.01em;
+      transition: gap 0.2s ease;
+    }
+
+    .card:hover .card-link {
+      gap: 10px;
+    }
+
+    .card-link svg {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover .card-link svg {
+      transform: translateX(2px);
+    }
+
+    .card-tag {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--gray-400);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--gray-200);
+      background: var(--white);
+      padding: 24px;
+      text-align: center;
+    }
+
+    footer p {
+      font-size: 13px;
+      color: var(--gray-400);
+      font-weight: 400;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 680px) {
+      .cards-grid { grid-template-columns: 1fr; }
+      .hero { padding: 32px 28px; }
+      .hero-stats { gap: 20px; }
+      .header-badge { display: none; }
+      main { padding: 32px 16px 48px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="header-inner">
+      <a href="#" class="brand">
+        <svg class="brand-logo" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M138.5 75C160.357 75 183.54 85.6074 201.011 96.7168C202.056 97.3814 202.232 98.8291 201.39 99.7373L179.468 123.375C178.8 124.095 177.711 124.221 176.882 123.695C165.204 116.289 151.353 112 136.5 112C94.8025 112 61 145.803 61 187.5C61 229.197 94.8025 263 136.5 263C170.859 263 199.857 240.407 209 209C209.24 208.28 208.8 208.004 208 208C201.366 207.964 194.974 208.117 188.954 208.022C193.313 198.942 202.5 187.869 213.575 176.849C220.35 170.614 232.089 166.037 240.329 163.424C244.727 162.029 249.335 161.5 253.948 161.5H314.373C315.526 161.5 316.443 162.472 316.305 163.616C314.925 175.003 307.526 194.872 286.5 197.5H247.905C246.839 197.5 245.962 198.326 245.886 199.39C244.888 213.383 239.758 240.913 225.891 255.146C225.136 255.92 225.065 257.149 225.774 257.965L233.144 266.862C233.992 267.886 235.293 268.422 236.616 268.292L238.837 268.073C244.139 267.932 249.026 270.543 252.761 274.31L294.282 316.187C300.485 322.443 300.464 332.536 294.234 338.766L284.699 348.301C278.805 354.195 269.237 354.153 263.395 348.208L220.895 304.963C218.332 302.356 216.138 299.213 215.927 295.563C215.841 294.075 215.944 292.777 216.135 291.711C216.436 290.028 216.231 288.147 215.087 286.877L206.382 277.22C206.036 277.482 205.689 277.742 205.34 278C186.652 291.825 163.531 300 138.5 300C76.368 300 26 249.632 26 187.5C26 125.368 76.368 75 138.5 75ZM370.636 122.261C371.98 121.206 374 122.14 374 123.849V227.065C374 229.338 373.643 231.605 372.74 233.691C368.016 244.612 356.789 261.223 340.339 261.085C339.299 261.076 338.5 260.2 338.5 259.16V138.218C338.5 137.032 339.531 136.094 340.715 136.025C346.361 135.696 357.407 132.637 370.636 122.261ZM200.014 179C194.351 184.957 187.656 197.011 184.624 207.903C177.374 207.602 170.75 206.75 165 204.5C154.473 199.182 154.93 187.5 154.93 181.276C154.93 180 155.6 179 156.822 179H200.014ZM324.101 88.5C325.165 88.5 326.049 89.3379 326.049 90.4023C326.041 110.333 309.321 120.637 298.5 124.156C296.527 124.798 294.452 125 292.378 125H268.557C265.87 125 263.157 125.357 260.729 126.508C248.893 132.115 246.403 142.512 246.751 148.842C246.815 150.011 245.997 151.094 244.839 151.269C232.395 153.142 221.489 160.398 215.212 165.901C213.837 167.106 211.5 166.155 211.5 164.327V147.263C211.5 140.766 211.786 134.172 214.062 128.088C221.194 109.025 238.117 97.1726 250.65 91.4824C255.73 89.1763 261.333 88.5 266.912 88.5H324.101ZM371.671 88.5C372.896 88.5 373.834 89.5977 373.604 90.8008C368.796 115.951 350.801 123.824 340.528 124.876C339.417 124.99 338.5 124.084 338.5 122.967V90.5C338.5 89.3954 339.395 88.5 340.5 88.5H371.671Z" fill="#2E61FF"/>
+        </svg>
+        <div class="brand-text">
+          <span class="brand-name">GFI</span>
+          <span class="brand-sub">Ferramentas</span>
+        </div>
+      </a>
+      <div class="header-badge">4 ferramentas disponíveis</div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- CARDS -->
+    <div class="section-header">
+      <span class="section-title">Ferramentas disponíveis</span>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="cards-grid">
+
+      <!-- Card 1 -->
+      <a class="card" href="https://despesa-funcao.vercel.app/" target="_blank" rel="noopener">
+        <span class="card-tag">SICONFI</span>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 17L9 11L13 15L21 7M21 7H15M21 7V13" stroke="#2E61FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="card-title">Despesa por Função (SICONFI para auxílio SIOPE/SIOPS)</div>
+        <div class="card-desc">Envie sua MSC do SICONFI e saiba exatamente quanto está informando com despesas empenhadas, liquidadas e pagas por função.</div>
+        <div class="card-link">
+          Acessar ferramenta
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#2E61FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </a>
+
+      <!-- Card 2 -->
+      <a class="card" href="https://conciliador-ext.vercel.app/" target="_blank" rel="noopener">
+        <span class="card-tag">SICOM MG</span>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 7H5C3.89543 7 3 7.89543 3 9V18C3 19.1046 3.89543 20 5 20H19C20.1046 20 21 19.1046 21 18V9C21 7.89543 20.1046 7 19 7H16M8 7V5C8 3.89543 8.89543 3 10 3H14C15.1046 3 16 3.89543 16 5V7M8 7H16M12 12V16M10 14H14" stroke="#2E61FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="card-title">Conciliador EXT/CTB</div>
+        <div class="card-desc">Conciliação de saldos iniciais e finais entre os demonstrativos EXT e CTB do SICOM MG.</div>
+        <div class="card-link">
+          Acessar ferramenta
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#2E61FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </a>
+
+      <!-- Card 3 -->
+      <a class="card" href="https://conciliador-saldos-balancete.vercel.app/" target="_blank" rel="noopener">
+        <span class="card-tag">SICOM MG</span>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 6H21M3 12H21M3 18H21" stroke="#2E61FF" stroke-width="2" stroke-linecap="round"/>
+            <path d="M9 3L9 21M15 3L15 21" stroke="#2E61FF" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="2 3"/>
+          </svg>
+        </div>
+        <div class="card-title">Conciliador de Balancete</div>
+        <div class="card-desc">Conciliação de saldos iniciais e finais no Balancete do SICOM MG.</div>
+        <div class="card-link">
+          Acessar ferramenta
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#2E61FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </a>
+
+      <!-- Card 4 -->
+      <a class="card" href="https://consolidador-balancete.vercel.app/" target="_blank" rel="noopener">
+        <span class="card-tag">SICOM MG</span>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 16H5C3.89543 16 3 15.1046 3 14V6C3 4.89543 3.89543 4 5 4H19C20.1046 4 21 4.89543 21 6V14C21 15.1046 20.1046 16 19 16H16M8 16L12 20M8 16H16M16 16L12 20" stroke="#2E61FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="card-title">Consolidador de Balancete</div>
+        <div class="card-desc">Identificação e consolidação de duplicatas no Balancete do SICOM MG.</div>
+        <div class="card-link">
+          Acessar ferramenta
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="#2E61FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </a>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 GFI — Gestão Fiscal e Informacional</p>
+  </footer>
+
+</body>
+</html>
